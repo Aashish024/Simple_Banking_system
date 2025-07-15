@@ -1,19 +1,16 @@
 # .gitpod.yml
 
-# This file configures the Gitpod environment for your Simple Banking System project.
-
 # Specify the Docker image to use for the workspace.
 # This image comes with Java 17 and other common development tools.
 image: gitpod/workspace-java-17
 
-# Commands to run when the workspace starts.
+# Define tasks to run when the workspace starts.
 # This ensures your Java files are compiled automatically.
 tasks:
   - name: Compile Banking System
-    command: |
-      javac *.java
-    # No ports to open for a console application
-    openPorts: []
+    init: javac *.java
+    # For console applications, no ports need to be exposed.
+    # The 'openPorts' property is not typically used at the task level for this purpose.
 
 # VS Code extensions to install (optional, but highly recommended for a better experience)
 # These extensions provide Java language support, debugging, and testing features.
@@ -22,3 +19,9 @@ vscode:
     - redhat.java
     - vscjava.vscode-java-debug
     - vscjava.vscode-java-test
+
+# Optional: Define ports to expose if your application were a web server.
+# Not strictly necessary for a console application, but good to know.
+ports:
+  - port: 8080
+    onOpen: ignore # Ignore if no web server is running
